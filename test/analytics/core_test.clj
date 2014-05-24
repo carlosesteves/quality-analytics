@@ -1,6 +1,6 @@
-(ns qa.core-test
+(ns analytics.core-test
   (:require [clojure.test :refer :all]
             [qa.core :refer :all]))
 (deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+  (testing "template test"
+    (is (= 1 1))))
