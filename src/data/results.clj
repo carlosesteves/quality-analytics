@@ -1,4 +1,4 @@
-(ns data.test_results
+(ns data.results
   (:require [clj-json.core :as json])
   (:require [data.redis :as redis])
   (:use [clojure.tools.logging :only (info error)]))
@@ -14,13 +14,17 @@
         {:id response}))))
 
 ; get last build time
-(defn get-last-build [build_tag test_type]
-  (let [results (redis/db-search-keys build_tag test_type)]
+(defn get-last-build [type rc]
+  (let [results (redis/db-search-keys type rc)]
     (if (= 0 (count results))
       (do
-        (info "No results found in database")
-        {:status 404 :rc build_tag :test_type test_type :duration "0"})
+        (error "No results found in database")
+        {:status 404 :rc rc :type type :duration "0"})
       (let
         [result (redis/db-get-by-key (first results))]
         (info (str "Result is " result))
-        {:status 200 :rc build_tag :test_type test_type :duration result}))))
+        {:status 200 :rc rc :type type :duration result}))))
+
+(defn get-builds [test_type]
+  (map redis/convert-redis-key-to-json
+      (redis/db-search-keys "test" test_type)))

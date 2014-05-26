@@ -3,12 +3,12 @@
   (:use ring.middleware.json-params)
   (:use ring.adapter.jetty)
   (:require [clj-json.core :as json])
-  (:require [data.test_results :as test_results])
+  (:require [data.results :as results])
   (:require [analytics.web :as web]))
 
 
 (defn json-response [data & [status]]
-  {:status (or status 200)
+  {:status (get data :status)
    :headers {"Content-Type" "application/json"}
    :body (json/generate-string data)})
 
@@ -17,14 +17,7 @@
   ;(GET "/test/results/performance/all" []
    ; (json-response {:test "all results"}))
   (GET "/test/results/:id" [id]
-    (json-response (test_results/get-results id))))
-
-
-; app settings
-(def app
-  (-> handler
-    wrap-json-params))
-
-(def -main
-  (run-jetty #'web/app {:port 8080}))
+    (json-response (results/get-results id)))
+  (GET "/results/:rc/:type/last" [rc type]
+    (json-response (results/get-last-build type rc))))
 

@@ -9,5 +9,8 @@
                  [ring/ring-json "0.2.0"]
                  [ring-json-params "0.1.3"]
                  [compojure "1.1.6"]
-                 [clj-json "0.3.2"]]
-  :main analytics.web)
+                 [clj-json "0.3.2"]
+                 [com.taoensso/carmine "2.6.2"]
+                 [org.clojure/tools.logging "0.2.6"]
+                 [org.clojure/tools.cli "0.2.4"]]
+  :main analytics.core)
