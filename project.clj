@@ -10,7 +10,7 @@
                  [ring-json-params "0.1.3"]
                  [compojure "1.1.6"]
                  [clj-json "0.3.2"]
-                 [com.taoensso/carmine "2.6.2"]
                  [org.clojure/tools.logging "0.2.6"]
-                 [org.clojure/tools.cli "0.2.4"]]
+                 [org.clojure/tools.cli "0.2.4"]
+                 [com.novemberain/monger "2.0.0-rc1"]]
   :main analytics.core)

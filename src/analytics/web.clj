@@ -8,16 +8,30 @@
 
 
 (defn json-response [data & [status]]
-  {:status (get data :status)
+  (println data)
+  {:status 200
    :headers {"Content-Type" "application/json"}
    :body (json/generate-string data)})
 
+; results routes
+(defroutes results-routes
+  (GET "/:project/:stage/all" [project stage]
+    (json-response (results/get-builds project stage))))
+  ;(GET "/:project/:bid/all" [project bid]
+   ; (json-response (results/get-builds project bid)))
+  ;(GET "/:project/:bid/:stage/all" [project bid stage]
+   ; (json-response (results/get-builds project bid stage))))
+
+  ;(GET "/:rc/:type/last" [rc type]
+  ;  (json-response (results/get-last-build type rc))))
+
 ; routes list
 (defroutes handler
-  ;(GET "/test/results/performance/all" []
-   ; (json-response {:test "all results"}))
-  (GET "/test/results/:id" [id]
-    (json-response (results/get-results id)))
-  (GET "/results/:rc/:type/last" [rc type]
-    (json-response (results/get-last-build type rc))))
+  ; API  routes
+  (context "/api/results" [] results-routes))
+  ; web app routes
+  ;(GET "/test" []
+  ;  (json-response (results/get-builds "" ""))))
+
+
 
