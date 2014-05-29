@@ -22,9 +22,9 @@
 ; results routes
 (defroutes results-routes
   (GET "/:project/:stage/all" [project stage]
-    (json-response (results/get-builds project stage))))
-  ;(GET "/:project/:bid/all" [project bid]
-   ; (json-response (results/get-builds project bid)))
+    (json-response (results/get-builds project stage)))
+  (GET "/:project/all" [project]
+    (json-response (results/get-builds project ""))))
   ;(GET "/:project/:bid/:stage/all" [project bid stage]
    ; (json-response (results/get-builds project bid stage))))
 
