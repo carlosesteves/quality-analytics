@@ -13,6 +13,12 @@
    :headers {"Content-Type" "application/json"}
    :body (json/generate-string data)})
 
+(defn html-response [data]
+  (println data)
+  {:status 200
+   :headers {"Content-Type" "text/html"}
+   :body data})
+
 ; results routes
 (defroutes results-routes
   (GET "/:project/:stage/all" [project stage]
@@ -28,10 +34,9 @@
 ; routes list
 (defroutes handler
   ; API  routes
-  (context "/api/results" [] results-routes))
+  (context "/api/results" [] results-routes)
   ; web app routes
-  ;(GET "/test" []
-  ;  (json-response (results/get-builds "" ""))))
+  (GET "/" [] (html-response "Hello B")))
 
 
 

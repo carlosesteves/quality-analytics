@@ -13,7 +13,8 @@
 
 ; find maps
 (defn find-builds-by-project-stage [project stage]
-  (let [conn (mg/connect)
+  (println (str "Connecting to 172.18.11.95 port 27017" ))
+  (let [conn (mg/connect {:host "172.18.11.95" :port 27017})
         db   (mg/get-db conn "data")
         coll "data"]
     (mc/find-one-as-map db coll {} {"projects" project, "_id" 0,  stage 1})))

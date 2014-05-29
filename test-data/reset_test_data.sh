@@ -1,3 +1,4 @@
+#!/bin/sh
 # clear everything
 mongo data --eval "db.dropDatabase()"
 

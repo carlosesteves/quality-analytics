@@ -1,0 +1,7 @@
+---
+applications:
+- name: quality-analytics
+  memory: 512M
+  instances: 1
+  host: qa
+  path: .
