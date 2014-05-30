@@ -19,4 +19,7 @@
 
 ; get all builds for project & bid
 (defn get-builds [project stage]
-  (mongo/find-builds-by-project-stage project stage))
+  (let [query_results (mongo/find-builds-by-project project stage)]
+    (if (nil? query_results)
+      {:status 404 :message "Data not found"}
+      query_results)))

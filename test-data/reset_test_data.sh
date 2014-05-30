@@ -18,5 +18,17 @@ mongo data  --eval "db.data.insert(
             { "id": "rc202", "duration": 89, "timestamp": "2014-05-06" },
             { "id": "rc203", "duration": 456, "timestamp": "2014-05-06" },
         ]
+},
+{
+    "projects": "aim",
+    "build":
+        [
+            { "id": "rc201", "duration": 2464, "timestamp": "2014-05-06" },
+        ],
+    "test":
+        [
+            { "id": "rc203", "duration": 364, "timestamp": "2015-05-06" },
+            { "id": "rc204", "duration": 456, "timestamp": "2015-05-06" },
+        ]
 }
 )"

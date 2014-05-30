@@ -16,8 +16,11 @@
   (-> web/handler
     wrap-json-params))
 
-(defn -main [port]
+(defn -main [& port]
   ;(app-settings args)
-  (run-jetty #'core/app {:port (Integer. port)}))
+  (if (nil? port)
+    (run-jetty #'core/app {:port 8080})
+    (run-jetty #'core/app {:port (Integer. port)})))
+
 
 

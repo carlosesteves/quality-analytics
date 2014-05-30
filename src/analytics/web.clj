@@ -8,10 +8,11 @@
 
 
 (defn json-response [data & [status]]
-  (println data)
-  {:status 200
-   :headers {"Content-Type" "application/json"}
-   :body (json/generate-string data)})
+  (if (nil? status)
+    {:status 404 :headers {"Content-Type" "application/json"}
+    :body (json/generate-string data)}
+    ({:status 200 :headers {"Content-Type" "application/json"}
+    :body (json/generate-string data)})))
 
 (defn html-response [data]
   (println data)
@@ -25,11 +26,6 @@
     (json-response (results/get-builds project stage)))
   (GET "/:project/all" [project]
     (json-response (results/get-builds project ""))))
-  ;(GET "/:project/:bid/:stage/all" [project bid stage]
-   ; (json-response (results/get-builds project bid stage))))
-
-  ;(GET "/:rc/:type/last" [rc type]
-  ;  (json-response (results/get-last-build type rc))))
 
 ; routes list
 (defroutes handler
